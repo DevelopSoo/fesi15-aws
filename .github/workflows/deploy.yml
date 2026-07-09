@@ -21,6 +21,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PEM_KEY }}
+          envs: ENV
           script: |
             set -e
             cd /home/ubuntu/fesi15-aws
