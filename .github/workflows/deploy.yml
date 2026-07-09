@@ -21,12 +21,14 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PEM_KEY }}
+          # 위에서 등록한 ENV 변수를 EC2 서버로 전달한다.
           envs: ENV
           script: |
             set -e
             cd /home/ubuntu/fesi15-aws
-            rm -rf .env
+            rm -rf .env 
             git pull origin main
+            # 루트 경로에 .env 파일을 만든다.
             echo "$ENV" > .env
             pm2 kill
             npm ci
