@@ -13,6 +13,10 @@ jobs:
     steps:
       - name: SSH로 EC2 접속하기
         uses: appleboy/ssh-action@v1
+        # env: 현재 step 실행 환경에 환경변수를 등록하는 옵션
+        env:
+          # ENV라는 변수에 github secrets에 저장된 ENV 값을 넣어준다.
+          ENV: ${{ secrets.ENV }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
@@ -20,7 +24,9 @@ jobs:
           script: |
             set -e
             cd /home/ubuntu/fesi15-aws
+            rm -rf .env
             git pull origin main
+            echo "$ENV" > .env
             pm2 kill
             npm ci
             npm run build
