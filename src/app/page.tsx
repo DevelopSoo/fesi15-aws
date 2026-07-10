@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("2");
 
   useEffect(() => {
     fetch("/api")
